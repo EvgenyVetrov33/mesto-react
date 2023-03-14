@@ -6,7 +6,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
 	const [userName, setUserName] = useState("")
 	const [userDescription, setUserDescription] = useState("")
 	const [userAvatar, setUserAvatar] = useState("")
-	const [cards, getInitialCards] = useState([])
+	const [cards, setInitialCards] = useState([])
 
 	useEffect(() => {
 		api
@@ -18,9 +18,9 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
 			})
 			.catch((error) => console.log(`Ошибка: ${error}`))
 		api
-			.getInitialCards()
+			.setInitialCards()
 			.then((cardsData) => {
-				getInitialCards(
+				setInitialCards(
 					cardsData.map((data) => ({
 						likes: data.likes,
 						name: data.name,

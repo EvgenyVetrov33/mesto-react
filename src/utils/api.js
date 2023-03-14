@@ -12,7 +12,7 @@ class Api {
 	}
 
 	// Получение карточек с сервера
-	getInitialCards() {
+	setInitialCards() {
 		return fetch(`${this._baseUrl}/cards`, {
 			headers: this._headers
 		})
