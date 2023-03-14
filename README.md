@@ -12,12 +12,12 @@
 * Сборка Webpack
 * Git
 ### Инструкция по установке
-git clone https://github.com/VeraChernushina/mesto-react.git
-cd mesto-react
-npm install
-npm start
+* git clone https://github.com/EvgenyVetrov33/mesto-react.git
+* cd mesto-react
+* npm install
+* npm start
 #### Дальнейшие планы на улучшение проекта:
 * подключить бэкенд
 * добавить новый функционал
 #### Ссылка на GitHub Pages:
-* (https://evgenyvetrov33.github.io/mesto/)
+* https://evgenyvetrov33.github.io/mesto-react/
