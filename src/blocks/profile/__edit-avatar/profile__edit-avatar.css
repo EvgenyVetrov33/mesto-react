@@ -9,10 +9,9 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	border-radius: 50%;
-	transition: background-color 0.2s linear;
 	opacity: 0;
 	cursor: pointer;
-	transition: all 0.5s ease-in-out;
+	transition: all .5s ease-in-out;
 }
 
 .profile__edit-avatar:hover {
