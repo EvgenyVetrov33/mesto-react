@@ -5,15 +5,9 @@ function PopupWithForm({ isOpen, onClose, onCloseEsc, onCloseOverlay, onSubmit, 
 	useEffect(() => {
 		if (isOpen) {
 			document.addEventListener('keydown', onCloseEsc);
-		} else {
-			document.removeEventListener('keydown', onCloseEsc);
-		}
-	}, [isOpen])
-
-	useEffect(() => {
-		if (isOpen) {
 			document.addEventListener('mousedown', onCloseOverlay);
 		} else {
+			document.removeEventListener('keydown', onCloseEsc);
 			document.removeEventListener('mousedown', onCloseOverlay);
 		}
 	}, [isOpen])

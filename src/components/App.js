@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../index.css';
 import api from '../utils/api';
@@ -13,16 +13,17 @@ import ImagePopup from "./ImagePopup"
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
-	const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
-	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
-	const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
+	const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false)
+	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false)
+	const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false)
 	const [selectedCard, setSelectedCard] = React.useState({})
-	const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(null)
+	const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(null)
 
-	const [isLoading, setLoading] = React.useState(false)
+	const [isLoading, setLoading] = useState(false)
 
-	const [currentUser, setCurrentUser] = React.useState({})
-	const [cards, setCards] = React.useState([]);
+	const [currentUser, setCurrentUser] = useState({})
+	const [cards, setCards] = useState([]);
+	const [removedCardId, setRemovedCardId] = useState('');
 
 	useEffect(() => {
 		Promise.all([api.getUserInfo(), api.setInitialCards()]).then(([profileInfo, card]) => {
@@ -100,6 +101,7 @@ function App() {
 
 	function handleConfimationClick(card) {
 		setConfirmationPopupOpen(card);
+		setRemovedCardId(card);
 	}
 
 	function handleCardDelete(card) {
@@ -176,11 +178,14 @@ function App() {
 					/>
 
 					<ConfirmationPopup
-						card={isConfirmationPopupOpen}
+						isOpen={isConfirmationPopupOpen}
 						onClose={closeAllPopups}
-						name='delete-form'
-						title='Вы уверены?'
+						onCloseEsc={closePopupWithEsc}
+						onCloseOverlay={closePopupWithClickOnOverlay}
 						onCardDelete={handleCardDelete}
+						isLoading={isLoading}
+						onSubmit={handleCardDelete}
+						card={removedCardId}
 					/>
 
 					<ImagePopup
