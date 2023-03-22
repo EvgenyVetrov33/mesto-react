@@ -35,6 +35,7 @@
 @import url('./blocks/element/__button-like/element__button-like.css');
 @import url('./blocks/element/__button-like/_focus/element__button-like_focus.css');
 @import url('./blocks/element/__button-delete/element__button-delete.css');
+@import url('./blocks/element/__button-delete/_hidden/element__button-delete_hidden.css');
 @import url('./blocks/element/__likes-number/element__likes-number.css');
 @import url('./blocks/element/__likes/element__likes.css');
 /*============БЛОК FOOTER===========================================*/

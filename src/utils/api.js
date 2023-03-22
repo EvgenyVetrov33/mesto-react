@@ -72,12 +72,8 @@ class Api {
 		return fetch(`${this._baseUrl}/users/me`, {
 			method: 'PATCH',
 			headers: this._headers,
-			body: JSON.stringify({
-				name: data['inputName'],
-				about: data['inputJob'],
-			})
-		})
-			.then(res => this._parseResponse(res));
+			body: JSON.stringify(data),
+		}).then(res => this._parseResponse(res));
 	}
 
 	// Редактирование аватара пользователя через попап

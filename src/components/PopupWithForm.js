@@ -1,20 +1,35 @@
-import React from "react"
+import { useEffect } from 'react';
 
-function PopupWithForm({ name, title, buttonText, children, isOpen, onClose }) {
+function PopupWithForm({ isOpen, onClose, onCloseEsc, onCloseOverlay, onSubmit, isLoading, name, title, submitButton, submitBtnLoading, children }) {
+
+	useEffect(() => {
+		if (isOpen) {
+			document.addEventListener('keydown', onCloseEsc);
+		} else {
+			document.removeEventListener('keydown', onCloseEsc);
+		}
+	}, [isOpen])
+
+	useEffect(() => {
+		if (isOpen) {
+			document.addEventListener('mousedown', onCloseOverlay);
+		} else {
+			document.removeEventListener('mousedown', onCloseOverlay);
+		}
+	}, [isOpen])
+
 	return (
-		<div className={`popup popup_type_${name} ${isOpen ? "popup_opened" : ""}`}>
+		<section className={`popup popup_type_${name} ${isOpen && `popup_opened`}`}>
 			<div className="popup__container">
-				<button className="popup__close" type="button" onClick={onClose} />
-				<form className="popup__form" name={name}>
-					<h2 className="popup__title">{title}</h2>
+				<button onClick={onClose} className="popup__close" type="button"></button>
+				<form name={`popup-${name}-form`} className="popup__form" onSubmit={onSubmit}>
+					<h3 className="popup__title">{title}</h3>
 					{children}
-					<button className="popup__button popup__button_disabled" type="submit">
-						{buttonText || "Сохранить"}
-					</button>
+					<button className={`popup__button `} type="submit">{isLoading ? submitBtnLoading : submitButton}</button>
 				</form>
 			</div>
-		</div>
-	)
-}
+		</section>
+	);
+};
 
-export default PopupWithForm
+export default PopupWithForm;
